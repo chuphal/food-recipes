@@ -7,7 +7,7 @@ const Card = ({ recipe }) => {
       <div className="card dietary-card">
         <Link to={`/recipe/${recipe._id}`} className="link-dietary-card">
           <img
-            src={`http://localhost:5000/upload/${recipe.image}`}
+            src={`/upload/${recipe.image}`}
             // className="carousel-row-img"
             alt="..."
           />

@@ -8,13 +8,9 @@ const useCreateRecipe = () => {
   const recipeCreater = async (formData) => {
     setLoading(true);
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/v1/recipe",
-        formData,
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.post("/api/v1/recipe", formData, {
+        withCredentials: true,
+      });
       const data = response.data;
       if (response.error) {
         throw new Error(response.error);

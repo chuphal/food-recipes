@@ -10,12 +10,9 @@ const useSearch = (searched) => {
     const searchRecipes = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(
-          `http://localhost:5000/api/v1/recipe?search=${searched}`,
-          {
-            withCredentials: true,
-          }
-        );
+        const response = await axios.get(`/api/v1/recipe?search=${searched}`, {
+          withCredentials: true,
+        });
         const data = response.data;
         if (response.error) {
           throw new Error(response.error);

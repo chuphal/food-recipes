@@ -11,12 +11,9 @@ const useGetLatestRecipes = (page) => {
     const getLatestRecipes = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(
-          `http://localhost:5000/api/v1/recipe?page=${page}`,
-          {
-            withCredentials: true,
-          }
-        );
+        const response = await axios.get(`/api/v1/recipe?page=${page}`, {
+          withCredentials: true,
+        });
         const data = response.data;
         if (response.error) {
           throw new Error(response.error);

@@ -9,13 +9,9 @@ const useUpdateRecipe = () => {
     console.log("inside recipe updater", formData, recipeId);
     setLoading(true);
     try {
-      const response = await axios.put(
-        `http://localhost:5000/api/v1/recipe/${recipeId}`,
-        formData,
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.put(`/api/v1/recipe/${recipeId}`, formData, {
+        withCredentials: true,
+      });
 
       const data = response.data;
       if (response.error) {
