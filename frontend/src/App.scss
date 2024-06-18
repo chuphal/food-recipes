@@ -1,0 +1,446 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-container {
+  width: 85%;
+}
+
+.dietary-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dietary-button {
+  display: inline-block;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem 1.5rem;
+  text-decoration: none;
+  white-space: nowrap;
+  text-transform: none;
+  font-family: Renner, helvetica, sans-serif;
+  font-feature-settings: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  line-break: auto;
+  line-height: 1.42em;
+  font-size: 12px;
+  font-weight: 700;
+  overflow-wrap: normal;
+}
+
+.checked-dietary-btn {
+  transition: background-color 0.25s ease 0s, color 0.25s ease 0s;
+  text-decoration: none;
+  background-color: rgb(51, 51, 51);
+  color: rgb(255, 255, 255);
+}
+
+.dietary-btn {
+  display: inline-block;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem 1.5rem;
+  text-decoration: none;
+  white-space: nowrap;
+  text-transform: none;
+  font-family: Renner, helvetica, sans-serif;
+  font-style: normal;
+  letter-spacing: normal;
+  line-break: auto;
+  line-height: 1.42em;
+  font-size: 12px;
+  font-weight: 500;
+  overflow-wrap: normal;
+  text-decoration: none;
+  color: black;
+  background-color: rgba(192, 57, 57, 0.2);
+  border-radius: 1.5rem;
+  padding: 0.5rem 1.5rem;
+}
+
+.unchecked-dietary-btn {
+  border: none;
+  transition: background-color 0.25s ease 0s, color 0.25s ease 0s;
+  color: rgb(51, 51, 51);
+  background-color: rgb(246, 198, 198);
+}
+
+.unchecked-dietary-btn:hover {
+  border: 1px solid black;
+}
+
+.sub-dietary-container {
+  display: flex;
+  justify-content: center;
+
+  > div {
+    margin: 6px;
+  }
+}
+
+.carousel-row {
+  width: 90%;
+  display: flex;
+  overflow-x: scroll;
+  padding: 0.2rem;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.dietary-card {
+  margin: 1rem;
+  border: none;
+  width: 19rem;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+.link-dietary-card {
+  > img {
+    object-fit: cover;
+    border-radius: 1rem;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.card-content {
+  text-align: center;
+  margin-top: 0.9rem;
+  padding: 1rem;
+  min-height: 6rem;
+}
+
+.card-title {
+  text-decoration: none;
+  text-wrap: wrap;
+
+  > h5 {
+    font-weight: 700;
+  }
+
+  > :nth-child(1):hover {
+    text-decoration: underline;
+  }
+}
+
+.latest-recipe-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.latest-img-container {
+  > img {
+    width: 22rem;
+    height: 18rem;
+    border-radius: 1rem;
+    object-fit: cover;
+  }
+}
+.latest-sub-container {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+  padding: 1rem;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.latest-heading {
+  display: flex;
+  justify-content: center;
+  color: #987070;
+  margin: 2rem 2rem 1rem 2rem;
+  > h2 {
+    font-weight: 700;
+  }
+}
+
+.latest-content-card {
+  margin: 0.9rem;
+}
+
+.continue-button {
+  border: none;
+  font-weight: 700;
+  color: rgb(237 182 84);
+  background-color: white;
+}
+
+.continue-button:hover {
+  color: black;
+}
+
+.latest-content-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.recent-button {
+  max-width: 28rem;
+  font-weight: 700;
+  color: whitesmoke;
+  letter-spacing: 0.2rem;
+  background-color: #c39898;
+  padding: 0.8rem 2rem;
+  border-radius: 1rem;
+  border-style: none;
+  margin: 2rem;
+}
+
+.recent-button:hover {
+  background-color: black;
+}
+
+.feature-heading {
+  display: flex;
+  justify-content: center;
+}
+
+.register-page {
+  display: flex;
+  align-items: center;
+}
+
+.reg-img-section {
+  width: 50%;
+
+  height: 100vh;
+
+  > img {
+    float: left;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.reg-form-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100vh;
+}
+
+.reg-anchor {
+  > a {
+    text-decoration: none;
+    color: grey;
+  }
+
+  > a:hover {
+    color: blue;
+    text-decoration: underline;
+  }
+}
+
+.terms-link {
+  text-decoration: underline;
+}
+
+.terms-link:hover {
+  cursor: pointer;
+  color: blue;
+}
+
+.heading-format {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.single-recipe-container {
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  width: 80%;
+}
+
+.decription-recipe-format {
+  width: 90%;
+
+  margin-left: 5%;
+  > img {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+.main-single-card-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.first-single-card-div {
+  background-color: black;
+  width: 100%;
+  height: 300px;
+  color: whitesmoke;
+  display: flex;
+  padding: 4rem;
+}
+
+.card-img-div {
+  width: 400px;
+
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.last-single-card-div {
+  color: whitesmoke;
+  background-color: black;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.first-set-btn {
+  margin-top: 1rem;
+  text-align: center;
+  > button {
+    color: grey;
+    background-color: white;
+    padding: 10px 18px;
+    font-family: proximanova, Geneva, arial, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+
+  > button:hover {
+    background-color: black;
+    color: whitesmoke;
+  }
+}
+
+.center-single-card-div {
+  width: 90%;
+}
+
+.ingredients-div {
+  padding: 1rem;
+}
+
+.create-recipe-container {
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  width: 50rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.list-form-div {
+  display: flex;
+  align-items: center;
+
+  > input,
+  textarea {
+    width: 500px;
+    padding: 0.7rem;
+    margin-left: 40px;
+  }
+}
+
+.margin-div {
+  margin: 1rem;
+}
+
+.list-form-div1 {
+  display: flex;
+  > label {
+    margin-top: 1rem;
+  }
+
+  > input,
+  textarea {
+    width: 500px;
+    padding: 0.7rem;
+    margin-left: 40px;
+  }
+}
+
+.single-card-recipe-container {
+  width: 75%;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.main-render-div {
+  padding: 1rem;
+
+  width: 80%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.content-render-div {
+  margin: 2rem;
+  width: 99%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.preferences-div {
+  margin-left: 4.5rem;
+  width: 90%;
+  height: 37.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.custom-feature-div {
+  width: 20rem;
+  transition: transform 0.6s;
+  padding: 1rem;
+}
+.custom-feature-div:hover {
+  opacity: 0.5;
+  transform: scale(1.1);
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.main-feature-div {
+  max-width: 100%;
+  margin-top: 2rem;
+  padding: 0.3rem;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.logout-website {
+  font-size: 2rem;
+  transition: transform 0.6s;
+
+  :hover {
+    transform: scale(1.15);
+  }
+}
+.footer-section-div {
+  margin-left: 15%;
+}

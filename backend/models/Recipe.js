@@ -5,31 +5,34 @@ const RecipeSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide the recipe name"],
   },
-  description: {
+  description1: {
     type: String,
-    required: [true, "Please provide the recipe description"],
+    required: [true, "Please provide the short description of the recipe"],
+  },
+  description2: {
+    type: String,
+    required: [true, "Please provide the long description of the recipe"],
   },
 
   ingredients: {
-    type: Array,
+    type: [String],
     required: [true, "Please provide the ingredients"],
   },
-  steps: [
-    {
-      step: {
-        type: String,
-      },
-      description: {
-        type: String,
-      },
-      img: {
-        type: String,
-      },
-    },
-  ],
-  thumbnail: {
+  steps: {
+    type: [String],
+    required: [true, "Please provide the steps for recipe"],
+  },
+  image: {
     type: String,
     required: [true, "Provide a valid image of your recipe"],
+  },
+  foodtype: {
+    type: String,
+    require: [true, "Provide the food type of the recipe"],
+  },
+  country: {
+    type: String,
+    require: [true, "Provide the country for recipe"],
   },
   createdBy: {
     type: mongoose.Types.ObjectId,

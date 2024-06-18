@@ -9,14 +9,15 @@ import {
   deleteRecipe,
 } from "../controllers/recipe.js";
 import authentication from "../middlewares/authentication.js";
+import upload from "../middlewares/multer.js";
 
 router.get("/", getAllRecipes);
 
-router.post("/", authentication, createRecipe);
+router.post("/", authentication, upload, createRecipe);
 
 router.get("/:id", getSingleRecipe);
 
-router.put("/:id", authentication, updateRecipe);
+router.put("/:id", authentication, upload, updateRecipe);
 
 router.delete("/:id", authentication, deleteRecipe);
 

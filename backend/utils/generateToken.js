@@ -7,8 +7,8 @@ const generateTokenAndSetCookie = (payload, res) => {
   // converting in to cookie
   res.cookie("jwt", token, {
     maxAge: 15 * 24 * 60 * 60 * 1000, // mili sec.
-    httpOnly: true, // prevent xss attacks ie. cookie is not accessible using javascript.
-    sameSite: "strict", // CSRF attacks.
+    // httpOnly: true, // prevent xss attacks ie. cookie is not accessible using javascript.
+    // sameSite: "strict", // CSRF attacks.
     secure: process.env.NODE_ENV !== "development", // true when we are in production..
   });
 };

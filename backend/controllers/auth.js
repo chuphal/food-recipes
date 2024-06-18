@@ -33,10 +33,15 @@ export const register = async (req, res) => {
     },
     res
   );
+  const newUser = {
+    username: user.username,
+    email: user.email,
+    _id: user._id,
+  };
   logger.info("Successfully registered");
   res
     .status(StatusCodes.CREATED)
-    .json({ msg: "Successfully registered", user });
+    .json({ msg: "Successfully registered", user: newUser });
 };
 
 export const login = async (req, res) => {
@@ -68,9 +73,13 @@ export const login = async (req, res) => {
     },
     res
   );
-
+  const newUser = {
+    username: user.username,
+    email: user.email,
+    _id: user._id,
+  };
   logger.info("Successfully Login");
-  res.status(StatusCodes.OK).json({ msg: "Successfully login", user });
+  res.status(StatusCodes.OK).json({ msg: "Successfully login", user: newUser });
 };
 
 export const logout = async (req, res) => {

@@ -12,19 +12,31 @@ import { StatusCodes } from "http-status-codes";
 const myCache = new NodeCache();
 
 export const getAllRecipes = async (req, res) => {
-  const { page = 1 } = req.query;
-  const offSet = (page - 1) * 10;
+  const { page, search } = req.query;
+  const limit = 5;
+  const offSet = (page - 1) * limit;
 
+  const searchName = search ? search : "";
   let recipes = [];
-  if (myCache.has("recipes" + "_" + String(page))) {
-    recipes = JSON.parse(myCache.get("recipes" + "_" + String(page)));
+  if (myCache.has("recipes" + "_" + String(page) + searchName)) {
+    recipes = JSON.parse(
+      myCache.get("recipes" + "_" + String(page) + searchName)
+    );
   } else {
-    recipes = await Recipe.find()
-      .sort({ createdAt: -1 })
-      .skip(offSet)
-      .limit(10);
+    recipes = await Recipe.find({
+      $or: [
+        { name: { $regex: ".*" + searchName + ".*", $options: "i" } },
+        { ingredients: { $regex: ".*" + searchName + ".*", $options: "i" } },
+        { foodtype: { $regex: ".*" + searchName + ".*", $options: "i" } },
+        { country: { $regex: ".*" + searchName + ".*", $options: "i" } },
+      ],
+    }).sort({ createdAt: -1 });
 
-    myCache.set("recipes" + "_" + String(page), JSON.stringify(recipes), 600);
+    myCache.set(
+      "recipes" + "_" + String(page) + searchName,
+      JSON.stringify(recipes),
+      600
+    );
   }
 
   if (recipes.length === 0) {
@@ -32,10 +44,17 @@ export const getAllRecipes = async (req, res) => {
     throw new NotFoundError("Currently, No recipe is available");
   }
 
+  let recipeCount = recipes.length;
+  let totalPages = Math.ceil(recipes.length / limit);
+
+  if (page) {
+    recipes = recipes.slice(offSet, offSet + limit);
+  }
+
   logger.info("Successfully get all the recipes");
   res.status(StatusCodes.OK).json({
-    recipeCount: recipes.length,
-    totalPages: Math.ceil(recipes.length / 10),
+    recipeCount,
+    totalPages,
     currentPage: page,
     msg: "Successfully get all the recipes",
     recipes,
@@ -43,15 +62,33 @@ export const getAllRecipes = async (req, res) => {
 };
 
 export const createRecipe = async (req, res) => {
-  const { name, description, ingredients, steps, thumbnail } = req.body;
+  const {
+    name,
+    description1,
+    description2,
+    ingredients,
+    steps,
+    foodtype,
+    country,
+  } = req.body;
+
+  const imagePath = req.file ? req.file.filename : "";
 
   if (!name) {
     logger.error("Please provide the name of the recipe");
     throw new BadRequestError("Please provide the name of the recipe");
   }
-  if (!description) {
-    logger.error("Please provide the description of the recipe");
-    throw new BadRequestError("Please provide the description of the recipe");
+  if (!description1) {
+    logger.error("Please provide the short description of the recipe");
+    throw new BadRequestError(
+      "Please provide the short description of the recipe"
+    );
+  }
+  if (!description2) {
+    logger.error("Please provide the long description of the recipe");
+    throw new BadRequestError(
+      "Please provide the long description of the recipe"
+    );
   }
   if (!ingredients || ingredients.length === 0) {
     logger.error("Please provide ingredients regarding the recipe");
@@ -64,13 +101,34 @@ export const createRecipe = async (req, res) => {
     throw new BadRequestError("Please provide steps regarding the recipe");
   }
 
-  if (!thumbnail) {
+  if (!imagePath) {
     logger.error("Please provide image regarding the recipe");
     throw new BadRequestError("Please provide image regarding the recipe");
   }
+  if (!foodtype) {
+    logger.error("Please provide foodtype regarding the recipe");
+    throw new BadRequestError("Please provide foodtype regarding the recipe");
+  }
+  if (!country) {
+    logger.error("Please provide country regarding the recipe");
+    throw new BadRequestError("Please provide country regarding the recipe");
+  }
 
-  req.body.createdBy = req.user.userId;
-  const recipe = await Recipe.create(req.body);
+  const data1 = JSON.parse(ingredients);
+  const data2 = JSON.parse(steps);
+  const newObject = {
+    name,
+    description1,
+    description2,
+    ingredients: data1,
+    steps: data2,
+    image: imagePath,
+    createdBy: req.user.userId,
+    foodtype,
+    country,
+  };
+
+  const recipe = await Recipe.create(newObject);
 
   const keys = myCache.keys();
   const filtered_keys = keys.filter((key) => key.startsWith("recipes" + "_"));
@@ -124,38 +182,78 @@ export const updateRecipe = async (req, res) => {
     throw new CustomAPIError("Authorization-Invalid.", StatusCodes.FORBIDDEN);
   }
 
-  const { name, description, ingredients, steps, thumbnail } = req.body;
+  const {
+    name,
+    description1,
+    description2,
+    ingredients,
+    steps,
+    foodtype,
+    country,
+  } = req.body;
+  const imagePath = req.file ? req.file.filename : "";
 
   if (!name) {
     logger.error("Please provide the name of the recipe");
     throw new BadRequestError("Please provide the name of the recipe");
   }
-  if (!description) {
-    logger.error("Please provide the description of the recipe");
-    throw new BadRequestError("Please provide the description of the recipe");
+  if (!description1) {
+    logger.error("Please provide the short description of the recipe");
+    throw new BadRequestError(
+      "Please provide the short description of the recipe"
+    );
   }
-  if (!ingredients || ingredients.length === 0) {
+  if (!description2) {
+    logger.error("Please provide the long description of the recipe");
+    throw new BadRequestError(
+      "Please provide the long description of the recipe"
+    );
+  }
+
+  if (ingredients.length === 0) {
     logger.error("Please provide ingredients regarding the recipe");
     throw new BadRequestError(
       "Please provide ingredients regarding the recipe"
     );
   }
-  if (!steps || steps.length === 0) {
+  if (steps.length === 0) {
     logger.error("Please provide steps regarding the recipe");
     throw new BadRequestError("Please provide steps regarding the recipe");
   }
 
-  if (!thumbnail) {
+  if (!imagePath) {
     logger.error("Please provide image regarding the recipe");
     throw new BadRequestError("Please provide image regarding the recipe");
   }
+  if (!foodtype) {
+    logger.error("Please provide foodtype regarding the recipe");
+    throw new BadRequestError("Please provide foodtype regarding the recipe");
+  }
+  if (!country) {
+    logger.error("Please provide country regarding the recipe");
+    throw new BadRequestError("Please provide country regarding the recipe");
+  }
+  const data1 = JSON.parse(ingredients);
+  const data2 = JSON.parse(steps);
+  const newObject = {
+    name,
+    description1,
+    description2,
+    ingredients: data1,
+    steps: data2,
+    image: imagePath,
+    createdBy: req.user.userId,
+    foodtype,
+    country,
+  };
+
   myCache.del("recipe" + "#" + id);
 
   const keys = myCache.keys();
   const filtered_keys = keys.filter((key) => key.startsWith("recipes" + "_"));
   filtered_keys.map((key) => myCache.del(key));
 
-  const newRecipe = await Recipe.findByIdAndUpdate({ _id: id }, req.body, {
+  const newRecipe = await Recipe.findByIdAndUpdate({ _id: id }, newObject, {
     new: true,
     runValidators: true,
   });
