@@ -23,7 +23,7 @@ const Foodcarousel = () => {
               <img
                 className="d-block w-100 "
                 style={{ objectFit: "cover" }}
-                src={`http://localhost:5000/upload/${recipe.image}`}
+                src={`/upload/${recipe.image}`}
                 alt="First slide"
                 height={600}
               />

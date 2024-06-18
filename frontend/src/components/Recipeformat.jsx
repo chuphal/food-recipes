@@ -66,7 +66,7 @@ const Recipeformat = () => {
 
           <div className="decription-recipe-format">
             <img
-              src={`http://localhost:5000/upload/${singleItem.image}`}
+              src={`/upload/${singleItem.image}`}
               style={{ height: "60rem", objectFit: "cover" }}
             />
             <p>{singleItem.description2}</p>

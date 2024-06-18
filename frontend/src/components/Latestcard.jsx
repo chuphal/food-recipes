@@ -8,7 +8,7 @@ const Latestcard = ({ recipe }) => {
     <div className="latest-sub-container">
       <div>
         <Link to={`/recipe/${recipe._id}`} className="latest-img-container">
-          <img src={`http://localhost:5000/upload/${recipe.image}`} />
+          <img src={`/upload/${recipe.image}`} />
         </Link>
       </div>
       <div className="latest-content-card">

@@ -10,7 +10,7 @@ const Singlerecipecard = ({ recipe }) => {
           <p>{recipe.description1}</p>
         </div>
         <div className="card-img-div">
-          <img src={`http://localhost:5000/upload/${recipe.image}`} />
+          <img src={`/upload/${recipe.image}`} />
         </div>
       </div>
 
